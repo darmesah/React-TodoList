@@ -1,13 +1,14 @@
 import classes from './TodoList.module.css';
 
-const TodoList = (props) => {
-  const itemStyle = !props.completed
-    ? classes.item
-    : classes.item + ' ' + classes.cross;
+import bin from '../images/bin.png';
 
+const TodoList = (props) => {
   return (
-    <li className={itemStyle} onClick={props.removeTodo}>
-      {props.todo}
+    <li className={classes.item}>
+      {props.todo}{' '}
+      <button onClick={props.removeTodo} className={classes.button}>
+        <img src={bin} alt="bin" />
+      </button>
     </li>
   );
 };

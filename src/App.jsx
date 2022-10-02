@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddTodo from './components/AddTodo';
 import Todos from './components/Todos';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const todoItems = JSON.parse(localStorage.getItem('todos'));
+    if (todoItems) {
+      setTodos(todoItems);
+    }
+  }, []);
 
   const addTodoFunctionHandler = (newTodo) => {
     // setTodos((prevValue) => {
@@ -14,7 +21,11 @@ const App = () => {
     });
   };
 
-  const markDoneHandler = (id) => {
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const removeHandler = (id) => {
     const remove = todos.filter((todo) => {
       return todo.id !== id;
     });
@@ -26,7 +37,7 @@ const App = () => {
     <div>
       <h1>My TodoList</h1>
       <AddTodo addTodoFunction={addTodoFunctionHandler} />
-      <Todos todos={todos} removeTodo={markDoneHandler} />
+      <Todos todos={todos} removeTodo={removeHandler} />
     </div>
   );
 };
