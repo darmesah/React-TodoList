@@ -17,6 +17,7 @@ const AddTodo = (props) => {
     const newTodo = {
       id: Math.random(),
       name: enteredTodoText,
+      completed: false,
     };
 
     props.addTodoFunction(newTodo);

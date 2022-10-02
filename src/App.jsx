@@ -26,18 +26,34 @@ const App = () => {
   }, [todos]);
 
   const removeHandler = (id) => {
-    const remove = todos.filter((todo) => {
-      return todo.id !== id;
-    });
+    setTodos((prevValue) =>
+      prevValue.filter((todo) => {
+        return todo.id !== id;
+      })
+    );
+  };
 
-    setTodos(remove);
+  const completeHandler = (id) => {
+    setTodos((prevValue) =>
+      prevValue.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      })
+    );
   };
 
   return (
     <div>
       <h1>My TodoList</h1>
       <AddTodo addTodoFunction={addTodoFunctionHandler} />
-      <Todos todos={todos} removeTodo={removeHandler} />
+      <Todos
+        todos={todos}
+        removeTodo={removeHandler}
+        completeTodo={completeHandler}
+      />
     </div>
   );
 };

@@ -8,6 +8,11 @@
     justify-content: space-between;
 }
 
+.cross {
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+}
+
 .button {
     background-color: #EBB002;
     color: #f7f5ef;

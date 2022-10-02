@@ -11,6 +11,7 @@ const Todos = (props) => {
           id={todo.id}
           todo={todo.name}
           completed={todo.completed}
+          completeTodo={props.completeTodo.bind(null, todo.id)}
           removeTodo={props.removeTodo.bind(null, todo.id)}
         />
       ))}
