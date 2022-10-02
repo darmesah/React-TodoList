@@ -8,9 +8,10 @@ const Todos = (props) => {
       {props.todos.map((todo) => (
         <TodoList
           key={todo.id}
+          id={todo.id}
           todo={todo.name}
-          removeTodo={props.removeTodo.bind(null, todo.id)}
           completed={todo.completed}
+          removeTodo={props.removeTodo.bind(null, todo.id)}
         />
       ))}
     </ul>
