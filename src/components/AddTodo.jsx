@@ -1,8 +1,12 @@
+import { useContext } from 'react';
 import { useRef } from 'react';
+import TodosContext from '../context/todolist-context';
 
 import classes from './AddTodo.module.css';
 
 const AddTodo = (props) => {
+  const { addTodo } = useContext(TodosContext);
+
   const todoInputRef = useRef('');
 
   const addTodoHandler = (e) => {
@@ -20,7 +24,7 @@ const AddTodo = (props) => {
       completed: false,
     };
 
-    props.addTodoFunction(newTodo);
+    addTodo(newTodo);
 
     todoInputRef.current.value = '';
   };
