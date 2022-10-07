@@ -1,10 +1,13 @@
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { todoActions } from '../store/todos';
 import classes from './AddTodo.module.css';
 
 const AddTodo = (props) => {
   const todoInputRef = useRef('');
 
+  const dispatch = useDispatch();
   const addTodoHandler = (e) => {
     e.preventDefault();
 
@@ -20,7 +23,7 @@ const AddTodo = (props) => {
       completed: false,
     };
 
-    props.addTodoFunction(newTodo);
+    dispatch(todoActions.addTodo(newTodo));
 
     todoInputRef.current.value = '';
   };

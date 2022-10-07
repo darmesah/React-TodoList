@@ -2,10 +2,25 @@
     margin: 1rem 0;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     padding: 1rem;
+    font-size: 1.4rem;
     background-color: #f7f5ef;
+    display: flex;
+    justify-content: space-between;
+    cursor: default;
+
 }
 
 .cross {
     text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 2.5px;
+}
+
+button {
+    background-color: #EBB002;
+    border: none;
+    padding: 5px 8px 2px 8px;
+    font-size: 1.3rem;
+    color: #f7f5ef;
+    cursor: pointer;
+    border-radius: 3px;
 }
