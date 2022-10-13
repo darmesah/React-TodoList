@@ -1,3 +1,13 @@
+.input_cont {
+    border: 2px solid #9f9f9f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
 .form {
     width: 40rem;
     margin: 2rem auto;
@@ -12,7 +22,7 @@
 
 .form input {
     display: block;
-    width: 100%;
+    width: 95%;
     font: inherit;
     font-size: 1.5rem;
     padding: 0.5rem;

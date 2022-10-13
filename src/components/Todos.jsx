@@ -5,16 +5,15 @@ import TodoList from './TodoList';
 import classes from './Todos.module.css';
 
 const Todos = (props) => {
-  const { todos } = useContext(TodosContext);
+  const { filteredTodos } = useContext(TodosContext);
   return (
     <ul className={classes.todos}>
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <TodoList
           key={todo.id}
           id={todo.id}
           todo={todo.name}
           completed={todo.completed}
-          // removeTodo={props.removeTodo.bind(null, todo.id)}
         />
       ))}
     </ul>

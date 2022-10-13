@@ -1,29 +1,26 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const TodosContext = createContext({
   todos: [],
+  filteredTodo: [],
   addTodo: (todo) => {},
   removeTodo: (id) => {},
   toggleComplete: (id) => {},
+  filterTodo: (category) => {},
 });
 
-export const TodosContextProvider = (props) => {
-  const [todolist, setTodoList] = useState([]);
+let todoItems = [];
+if (todoItems) {
+  todoItems = JSON.parse(localStorage.getItem('todos'));
+}
 
-  useEffect(() => {
-    const savedTodos = JSON.parse(localStorage.getItem('todos'));
-    if (savedTodos) {
-      setTodoList(savedTodos);
-    }
-  }, []);
+export const TodosContextProvider = (props) => {
+  const [todolist, setTodoList] = useState(todoItems);
+  const [filteredTodo, setFilteredTodo] = useState(todolist);
 
   const addTodoHandler = (todo) => {
     setTodoList((prevItems) => [...prevItems, todo]);
   };
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todolist));
-  }, [todolist]);
 
   const removeTodoHandler = (id) => {
     setTodoList((prevItems) => prevItems.filter((todo) => todo.id !== id));
@@ -41,11 +38,27 @@ export const TodosContextProvider = (props) => {
     });
   };
 
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todolist));
+    setFilteredTodo(todolist);
+  }, [todolist]);
+
+  const filterTodoHandler = (category) => {
+    if (category === 'All') {
+      return setFilteredTodo(todolist);
+    }
+
+    const filterTodos = todolist.filter((todo) => todo.category === category);
+    setFilteredTodo(filterTodos);
+  };
+
   const context = {
     todos: todolist,
+    filteredTodos: filteredTodo,
     addTodo: addTodoHandler,
     removeTodo: removeTodoHandler,
     toggleComplete: toggleCompleteHandler,
+    filterTodo: filterTodoHandler,
   };
 
   return (
@@ -53,6 +66,10 @@ export const TodosContextProvider = (props) => {
       {props.children}
     </TodosContext.Provider>
   );
+};
+
+export const useGlobalContext = () => {
+  return useContext(TodosContext);
 };
 
 export default TodosContext;
